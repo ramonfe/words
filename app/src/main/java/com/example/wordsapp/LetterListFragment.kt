@@ -1,6 +1,7 @@
 package com.example.wordsapp
 
 import android.os.Bundle
+import android.util.Log
 import android.view.*
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
@@ -13,7 +14,7 @@ import com.example.wordsapp.databinding.FragmentLetterListBinding
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
 private const val ARG_PARAM1 = "param1"
 private const val ARG_PARAM2 = "param2"
-
+private const val ACT ="LetterListFragment"
 
 /**
  * A simple [Fragment] subclass.
@@ -25,8 +26,10 @@ class LetterListFragment : Fragment() {
     private val binding get() = _binding!!
     private lateinit var recyclerView: RecyclerView
     private var isLinearLayoutManager = true
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        Log.d(ACT,"onCreate called")
         setHasOptionsMenu(true)
     }
 
@@ -36,23 +39,25 @@ class LetterListFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         _binding = FragmentLetterListBinding.inflate(inflater, container, false)
-        val view = binding.root
-        return view
+        Log.d(ACT,"onCreateView called")
+        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         recyclerView = binding.recyclerView
+        Log.d(ACT,"onViewCreated called")
         chooseLayout()
     }
 
     override fun onDestroyView() {
         super.onDestroyView()
+        Log.d(ACT,"onDestroyView called")
         _binding=null
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         inflater.inflate(R.menu.layout_menu, menu)
-
+        Log.d(ACT,"onCreateOptionsMenu called")
         val layoutButton = menu.findItem(R.id.action_switch_layout)
         setIcon(layoutButton)
     }
@@ -95,5 +100,6 @@ class LetterListFragment : Fragment() {
 
             else -> super.onOptionsItemSelected(item)
         }
+        Log.d(ACT,"onOptionsItemSelected called")
     }
 }
